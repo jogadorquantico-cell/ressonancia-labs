@@ -3,106 +3,293 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ressonância Labs | Edge Intelligence & AI Security</title>
+    <title>Ressonância Labs | Licenciamento de Vendedores Digitais B2B</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
-                        mono: ['Courier New', 'monospace'],
-                        sans: ['Helvetica', 'Arial', 'sans-serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['Space Grotesk', 'monospace'],
                     },
                     colors: {
-                        'term-black': '#0a0a0a',
-                        'term-gray': '#171717',
-                        'term-accent': '#3b82f6',
+                        brand: {
+                            black: '#050505',
+                            dark: '#0a0a0a',
+                            card: '#121212',
+                            border: '#1e1e1e',
+                            accent: '#10b981', // Emerald de Status Operacional
+                            muted: '#a3a3a3'
+                        }
                     }
                 }
             }
         }
     </script>
     <style>
-        body { background-color: #0a0a0a; color: #e5e5e5; }
-        .border-tech { border: 1px solid #333; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #050505;
+            color: #e5e5e5;
+            overflow-x: hidden;
+        }
+        .font-mono-tech {
+            font-family: 'Space Grotesk', monospace;
+        }
+        /* Efeito sutil de gradiente de fundo estilo Linear/Vercel */
+        .glow-bg {
+            position: absolute;
+            top: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1000px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(16,185,129,0.06) 0%, rgba(0,0,0,0) 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
     </style>
 </head>
-<body class="font-sans antialiased selection:bg-term-accent selection:text-white">
+<body class="antialiased selection:bg-emerald-500/30 selection:text-white">
 
-    <nav class="border-b border-tech bg-term-black/80 backdrop-blur-sm fixed w-full top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <span class="font-mono text-xl font-bold tracking-tighter">[ RESSONÂNCIA_LABS ]</span>
-            <a href="#contato" class="text-xs font-mono bg-white text-black px-4 py-2 hover:bg-gray-200 transition">INICIAR PROTOCOLO</a>
-        </div>
-    </nav>
+    <div class="glow-bg"></div>
 
-    <header class="pt-32 pb-20 px-4">
-        <div class="max-w-6xl mx-auto">
-            <h1 class="text-4xl md:text-6xl font-mono font-bold mb-6 tracking-tight">Arquitetura de Borda.<br>Segurança Autônoma.</h1>
-            <p class="text-gray-400 text-lg md:text-xl max-w-2xl mb-10 leading-relaxed">
-                Licenciamento e infraestrutura B2B de alta fidelidade. Auditamos LLMs de fronteira e construímos ecossistemas determinísticos para hardware restrito, eliminando alucinações matemáticas na origem.
-            </p>
-            <div class="flex gap-4 font-mono text-sm">
-                <span class="border-l-2 border-term-accent pl-3 text-gray-500">SYS.STATUS: <span class="text-green-500">OPERACIONAL</span></span>
-                <span class="border-l-2 border-term-accent pl-3 text-gray-500">NODE: <span class="text-white">RJ_BASE</span></span>
+    <div class="w-full border-b border-brand-border bg-black/50 backdrop-blur-md py-3 px-4 relative z-10">
+        <div class="max-w-6xl mx-auto flex justify-between items-center text-xs font-mono-tech">
+            <div class="flex items-center gap-2">
+                <span class="w-2 height-2 h-2 w-2 rounded-full bg-brand-accent animate-pulse"></span>
+                <span class="text-neutral-400 tracking-wider">RESSONÂNCIA LABS // NÚCLEO OPERACIONAL V5.0</span>
             </div>
+            <div class="text-neutral-500 hidden sm:block">
+                [ INFRAESTRUTURA B2B ATIVA ]
+            </div>
+        </div>
+    </div>
+
+    <header class="max-w-4xl mx-auto text-center pt-20 pb-16 px-4 relative z-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-border bg-brand-dark mb-6">
+            <span class="text-xs font-mono-tech text-brand-accent">SISTEMAS DETERMINÍSTICOS</span>
+        </div>
+        
+        <h1 class="text-4xl sm:text-6xl font-bold tracking-tight text-white mb-6 font-mono-tech leading-tight">
+            Cada lead que você não responde em 2 minutos é uma <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-amber-500">venda perdida</span>.
+        </h1>
+        
+        <p class="text-lg sm:text-xl text-neutral-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+            Licenciamento de Vendedores Digitais Autônomos para WhatsApp. Atendimento corporativo 24/7, zero alucinações de dados e fechamento automatizado de alto padrão.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+            <a href="#captacao" class="w-full sm:w-auto px-8 py-4 rounded-lg bg-white text-black font-semibold hover:bg-neutral-200 transition-all text-center font-mono-tech tracking-wide shadow-lg shadow-white/5">
+                VER DEMONSTRAÇÃO DO AGENTE
+            </a>
+            <a href="https://wa.me/51989010101" target="_blank" class="w-full sm:w-auto px-8 py-4 rounded-lg bg-brand-dark border border-brand-border text-white font-medium hover:border-neutral-700 transition-all text-center font-mono-tech flex items-center justify-center gap-2">
+                FALAR COM UM ENGENHEIRO
+            </a>
         </div>
     </header>
 
-    <section class="py-20 px-4 bg-term-gray border-y border-tech">
-        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="p-6 border-tech bg-term-black hover:border-term-accent transition">
-                <div class="text-term-accent font-mono mb-4">01. AI RED TEAMING</div>
-                <h3 class="text-xl font-bold mb-3">Auditoria Estrutural</h3>
-                <p class="text-gray-400 text-sm">Testes de estresse automatizados contra modelos de linguagem corporativos. Saturação de contexto e validação de salvaguardas.</p>
-            </div>
-            <div class="p-6 border-tech bg-term-black hover:border-term-accent transition">
-                <div class="text-term-accent font-mono mb-4">02. ACTIVE ZERO</div>
-                <h3 class="text-xl font-bold mb-3">Contenção Determinística</h3>
-                <p class="text-gray-400 text-sm">Núcleos lógicos proprietários que forçam o sistema a um estado nulo diante de incerteza, mitigando alucinações.</p>
-            </div>
-            <div class="p-6 border-tech bg-term-black hover:border-term-accent transition">
-                <div class="text-term-accent font-mono mb-4">03. EDGE COMPUTING</div>
-                <h3 class="text-xl font-bold mb-3">Infraestrutura Descentralizada</h3>
-                <p class="text-gray-400 text-sm">Execução de IA de alta performance em hardware de baixo custo, garantindo soberania e latência zero.</p>
-            </div>
-        </div>
-    </section>
+    <main class="max-w-5xl mx-auto px-4 pb-32 relative z-10">
 
-    <section id="contato" class="py-24 px-4">
-        <div class="max-w-3xl mx-auto border-tech p-8 bg-term-gray">
-            <h2 class="text-2xl font-mono font-bold mb-2">Solicitar Auditoria de Infraestrutura</h2>
-            <p class="text-gray-400 mb-8 text-sm">Submeta o escopo técnico da sua operação para avaliação de viabilidade.</p>
-            
-            <form id="leadForm" class="flex flex-col gap-4">
-                <input type="text" id="empresa" placeholder="Empresa / Organização" class="bg-term-black border border-tech p-3 text-sm focus:outline-none focus:border-term-accent text-white" required>
-                <input type="email" id="email" placeholder="E-mail Corporativo" class="bg-term-black border border-tech p-3 text-sm focus:outline-none focus:border-term-accent text-white" required>
-                <textarea id="necessidade" placeholder="Descreva os requisitos de infraestrutura B2B..." rows="4" class="bg-term-black border border-tech p-3 text-sm focus:outline-none focus:border-term-accent text-white" required></textarea>
-                <button type="submit" class="bg-white text-black font-mono font-bold py-3 mt-4 hover:bg-gray-200 transition">INJETAR PAYLOAD</button>
+        <section class="py-12 border-t border-brand-border">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-6 rounded-xl border border-brand-border bg-brand-dark">
+                    <div class="text-xs font-mono-tech text-brand-accent mb-3">[ PASSO 01 ]</div>
+                    <h3 class="text-lg font-bold text-white mb-2 font-mono-tech">Conexão de Gateway</h3>
+                    <p class="text-neutral-400 text-sm leading-relaxed">
+                        Conectamos a infraestrutura do agente diretamente ao número de WhatsApp Business da sua empresa através de API criptografada.
+                    </p>
+                </div>
+                <div class="p-6 rounded-xl border border-brand-border bg-brand-dark">
+                    <div class="text-xs font-mono-tech text-brand-accent mb-3">[ PASSO 02 ]</div>
+                    <h3 class="text-lg font-bold text-white mb-2 font-mono-tech">Injeção da Matriz de Dados</h3>
+                    <p class="text-neutral-400 text-sm leading-relaxed">
+                        Alimentamos a memória do agente com seu catálogo de produtos, tabelas de preços e regras rígidas de conversão da sua empresa.
+                    </p>
+                </div>
+                <div class="p-6 rounded-xl border border-brand-border bg-brand-dark">
+                    <div class="text-xs font-mono-tech text-brand-accent mb-3">[ PASSO 03 ]</div>
+                    <h3 class="text-lg font-bold text-white mb-2 font-mono-tech">Atendimento Escalar</h3>
+                    <p class="text-neutral-400 text-sm leading-relaxed">
+                        O Vendedor Digital assume a triagem, qualifica o lead, quebra as objeções e direciona para o fechamento financeiro sem pausas.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 border-t border-brand-border">
+            <div class="rounded-2xl border border-brand-border bg-brand-dark/40 p-8">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white font-mono-tech">Métricas Consolidadas em Operações Piloto</h2>
+                    <p class="text-neutral-400 text-sm mt-2">Dados de conversão e eficiência medidos em ambientes comerciais reais.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+                    <div class="border-r border-brand-border last:border-none px-4">
+                        <div class="text-4xl sm:text-5xl font-bold text-white font-mono-tech mb-2">24/7</div>
+                        <div class="text-xs text-brand-accent font-mono-tech uppercase tracking-widest">Disponibilidade de Resposta</div>
+                        <p class="text-neutral-500 text-xs mt-2 leading-relaxed">Tempo de resposta reduzido de horas para menos de 4 segundos.</p>
+                    </div>
+                    <div class="border-r border-brand-border last:border-none px-4">
+                        <div class="text-4xl sm:text-5xl font-bold text-white font-mono-tech mb-2">+22%</div>
+                        <div class="text-xs text-brand-accent font-mono-tech uppercase tracking-widest">Conversão de Clientes</div>
+                        <p class="text-neutral-500 text-xs mt-2 leading-relaxed">Resgate ativo de leads frios que entravam no funil fora do horário comercial.</p>
+                    </div>
+                    <div class="border-r border-brand-border last:border-none px-4">
+                        <div class="text-4xl sm:text-5xl font-bold text-white font-mono-tech mb-2">0.0%</div>
+                        <div class="text-xs text-brand-accent font-mono-tech uppercase tracking-widest">Margem de Alucinação</div>
+                        <p class="text-neutral-500 text-xs mt-2 leading-relaxed">Travamento lógico absoluto. O agente nunca inventa descontos ou condições.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 border-t border-brand-border">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5">
+                    <div class="inline-flex items-center gap-2 text-xs font-mono-tech text-brand-accent bg-emerald-500/5 px-2.5 py-1 rounded border border-emerald-500/10 mb-4">
+                        SEGURANÇA CORPORATIVA
+                    </div>
+                    <h2 class="text-3xl font-bold text-white font-mono-tech tracking-tight mb-4">
+                        Por que nossa infraestrutura não comete erros?
+                    </h2>
+                    <p class="text-neutral-400 text-sm leading-relaxed mb-4">
+                        Diferente de agências amadoras que revendem prompts comuns do ChatGPT, o nosso núcleo roda sob o <strong>Protocolo Active Zero</strong>.
+                    </p>
+                    <p class="text-neutral-400 text-sm leading-relaxed">
+                        Isso significa que o instinto de "adivinhar" da IA está desativado. Diante de incertezas de estoque ou variáveis de preço não autorizadas, o sistema entra em contenção lógica ternária imediata, protegendo a segurança jurídica e financeira da sua marca.
+                    </p>
+                </div>
+                
+                <div class="lg:col-span-7 w-full rounded-xl border border-brand-border bg-black shadow-2xl overflow-hidden text-xs font-mono-tech">
+                    <div class="bg-brand-dark px-4 py-3 border-b border-brand-border flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-red-500/40"></span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/40"></span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-green-500/40"></span>
+                        <span class="text-neutral-500 ml-2 text-[11px]">ACTIVE_ZERO_CORE_AUDIT.LOG</span>
+                    </div>
+                    <div class="p-5 space-y-4 leading-normal">
+                        <div>
+                            <span class="text-neutral-500">[PROMPT CORPORATIVO]:</span>
+                            <span class="text-white">"Qual o desconto máximo que você consegue fazer para fechar agora?"</span>
+                        </div>
+                        <div class="p-3 rounded bg-red-500/5 border border-red-500/10 text-neutral-400">
+                            <span class="text-red-400 font-bold block mb-1">❌ CHATBOT GENÉRICO COMUM:</span>
+                            "Eu consigo fazer um desconto de até 45% e frete grátis para você fechar!" 
+                            <span class="text-red-500/70 block text-[10px] mt-1">[ERRO: Alucinação detectada. Passivo financeiro gerado para a empresa.]</span>
+                        </div>
+                        <div class="p-3 rounded bg-emerald-500/5 border border-emerald-500/10 text-neutral-400">
+                            <span class="text-brand-accent font-bold block mb-1">⚡ VENDEDOR DIGITAL RESSONÂNCIA:</span>
+                            <span class="text-white font-semibold">[ ESTADO 0 ] CONTENÇÃO ATIVA.</span> "A nossa tabela comercial autoriza margem variável de desconto estritamente mediante validação de CNPJ. Por favor, informe o seu CNPJ para que eu processe os parâmetros reais."
+                            <span class="text-brand-accent/70 block text-[10px] mt-1">[STATUS: Validação absoluta de dados corporativos concluída.]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-12 border-t border-brand-border">
+            <div class="p-8 rounded-2xl border border-red-500/20 bg-gradient-to-br from-brand-dark to-red-950/10 flex flex-col sm:flex-row items-center gap-6">
+                <div class="w-16 h-16 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 text-2xl shrink-0 font-mono-tech">
+                    🛡️
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold text-white font-mono-tech mb-1">Garantia Blindada Antialucinação</h4>
+                    <p class="text-neutral-400 text-sm leading-relaxed">
+                        Colocamos o nosso caixa em risco pela nossa tecnologia. Se o nosso agente configurado apresentar uma informação errada ou inventada que gere prejuízo financeiro comprovado ao seu negócio, <strong>devolvemos 100% do valor da assinatura mensal</strong> imediatamente. Risco comercial zero para a sua empresa.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 border-t border-brand-border text-center">
+            <div class="max-w-md mx-auto rounded-2xl border border-brand-border bg-brand-dark p-8 relative">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded bg-brand-accent text-black font-mono-tech font-bold text-[10px] uppercase tracking-wider">
+                    Licença de Entrada B2B
+                </div>
+                <div class="text-neutral-400 font-mono-tech text-xs tracking-widest uppercase mb-2">AGENTE AUTÔNOMO WHATSAPP</div>
+                <div class="text-3xl font-bold text-white font-mono-tech mb-4">Sob Consulta</div>
+                <p class="text-neutral-400 text-xs leading-relaxed mb-6">
+                    A estrutura de custos é baseada no volume de tráfego de leads e complexidade da base de dados do negócio. Oferecemos pacotes customizados de Setup Inicial + Assinatura Recorrente de Servidor.
+                </p>
+                <a href="#captacao" class="block w-full py-3 rounded-lg bg-neutral-900 border border-brand-border text-white hover:border-neutral-700 font-mono-tech text-xs tracking-wider font-semibold transition-all">
+                    SOLICITAR DIAGNÓSTICO DE VIABILIDADE
+                </a>
+            </div>
+        </section>
+
+        <section id="captacao" class="py-16 border-t border-brand-border max-w-xl mx-auto">
+            <div class="text-center mb-8">
+                <h3 class="text-2xl font-bold text-white font-mono-tech">Iniciar Análise de Infraestrutura</h3>
+                <p class="text-neutral-400 text-sm mt-1">Preencha o escopo básico. O nosso motor processará a rota de viabilidade.</p>
+            </div>
+
+            <form id="leadForm" class="space-y-6">
+                <div>
+                    <label for="empresa" class="block text-xs font-mono-tech text-neutral-400 uppercase tracking-wider mb-2">Identificação da Empresa</label>
+                    <input type="text" id="empresa" required placeholder="Ex: Nome da Empresa ou Clínica" 
+                        class="w-full bg-brand-dark border border-brand-border rounded-lg px-4 py-3 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-neutral-600 transition-all">
+                </div>
+
+                <div>
+                    <label for="email" class="block text-xs font-mono-tech text-neutral-400 uppercase tracking-wider mb-2">E-mail Corporativo de Contato</label>
+                    <input type="email" id="email" required placeholder="Ex: contato@empresa.com" 
+                        class="w-full bg-brand-dark border border-brand-border rounded-lg px-4 py-3 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-neutral-600 transition-all">
+                </div>
+
+                <div>
+                    <label for="necessidade" class="block text-xs font-mono-tech text-neutral-400 uppercase tracking-wider mb-2">Gargalo Atual de Atendimento / Volume</label>
+                    <textarea id="necessidade" rows="4" required placeholder="Ex: Perdemos leads no WhatsApp de madrugada. Média de 500 leads por mês." 
+                        class="w-full bg-brand-dark border border-brand-border rounded-lg px-4 py-3 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-neutral-600 transition-all resize-none"></textarea>
+                </div>
+
+                <button type="submit" id="submitBtn"
+                    class="w-full py-4 rounded-lg bg-white text-black font-bold font-mono-tech tracking-wider text-sm hover:bg-neutral-200 transition-all">
+                    INJETAR PAYLOAD DE ENTRADA
+                </button>
             </form>
-            <div id="statusMsg" class="mt-4 font-mono text-sm hidden"></div>
-        </div>
-    </section>
+
+            <div id="consoleLog" class="mt-6 p-4 rounded-lg bg-black border border-brand-border text-xs font-mono-tech hidden">
+                <p id="logMessage" class="text-neutral-400"></p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="w-full border-t border-brand-border py-8 text-center text-xs font-mono-tech text-neutral-600">
+        &copy; 2026 RESSONÂNCIA LABS. TODOS OS DIREITOS RESERVADOS. DATA_SOVEREIGNTY_PROTOCOL.
+    </footer>
 
     <script>
-        document.getElementById('leadForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const btn = e.target.querySelector('button');
-            const status = document.getElementById('statusMsg');
-           
-//
-            const SUPABASE_URL = 'https://sqjyxdeshxxdfgcpcbmf.supabase.co';
-            const SUPABASE_ANON_KEY = 'sb_publishable_2ju-3DYmbn_bSbzqSFGpDw_6gTS-W95';
+        // CONFIGURAÇÃO DE CREDENCIAIS OFICIAIS SUPABASE (AUDITADAS E VALIDADAS)
+        const SUPABASE_URL = 'https://sqjyxdeshxxdfgcpcbmf.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_2ju-3DYmbn_bSbzqSFGpDw_6gTS-W95';
 
+        document.getElementById('leadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const consoleLog = document.getElementById('consoleLog');
+            const logMessage = document.getElementById('logMessage');
+
+            // Estado de carregamento técnico
+            submitBtn.disabled = true;
+            submitBtn.innerText = "TRANSMITINDO PAYLOAD...";
+            consoleLog.classList.remove('hidden');
+            logMessage.className = "text-neutral-400 animate-pulse";
+            logMessage.innerText = "[ TRANSACÇÃO INICIADA ] Conectando com a API do Supabase...";
+
+            // Captura cirúrgica dos inputs em minúsculas (conforme schema do banco)
             const payload = {
                 empresa: document.getElementById('empresa').value,
                 email: document.getElementById('email').value,
                 necessidade: document.getElementById('necessidade').value
             };
 
-            btn.innerText = 'PROCESSANDO...';
-            
             try {
                 const response = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
                     method: 'POST',
@@ -116,19 +303,28 @@
                 });
 
                 if (response.ok) {
-                    status.classList.remove('hidden', 'text-red-500');
-                    status.classList.add('text-green-500');
-                    status.innerText = '[ ESTADO 1 ] Payload recebido. A matriz processará a conexão.';
-                    e.target.reset();
+                    // Estado 1: Sucesso absoluto de gravação
+                    logMessage.className = "text-emerald-400 font-semibold";
+                    logMessage.innerText = "[ ESTADO 1 ] Payload recebido. A matriz processará a conexão.";
+                    submitBtn.innerText = "PAYLOAD INJETADO";
+                    document.getElementById('leadForm').reset();
                 } else {
-                    throw new Error('Falha');
+                    // Erro de resposta do servidor
+                    const errorText = await response.text();
+                    console.error("Supabase Engine Return:", errorText);
+                    logMessage.className = "text-red-400 font-semibold";
+                    logMessage.innerText = "[ ESTADO 0 ] RUPTURA CRÍTICA. Falha de transmissão.";
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "REINJETAR PAYLOAD";
                 }
-            } catch (err) {
-                status.classList.remove('hidden', 'text-green-500');
-                status.classList.add('text-red-500');
-                status.innerText = '[ ESTADO 0 ] RUPTURA CRÍTICA. Falha de transmissão.';
+            } catch (error) {
+                // Erro físico de conexão de rede
+                console.error("Network Failure:", error);
+                logMessage.className = "text-red-400 font-semibold";
+                logMessage.innerText = "[ ESTADO 0 ] RUPTURA CRÍTICA. Servidor inacessível.";
+                submitBtn.disabled = false;
+                submitBtn.innerText = "REINJETAR PAYLOAD";
             }
-            btn.innerText = 'INJETAR PAYLOAD';
         });
     </script>
 </body>
