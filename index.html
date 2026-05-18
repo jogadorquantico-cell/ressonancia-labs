@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ressonância Labs | Edge Intelligence & AI Security</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        mono: ['Courier New', 'monospace'],
+                        sans: ['Helvetica', 'Arial', 'sans-serif'],
+                    },
+                    colors: {
+                        'term-black': '#0a0a0a',
+                        'term-gray': '#171717',
+                        'term-accent': '#3b82f6',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #0a0a0a; color: #e5e5e5; }
+        .border-tech { border: 1px solid #333; }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-term-accent selection:text-white">
+
+    <nav class="border-b border-tech bg-term-black/80 backdrop-blur-sm fixed w-full top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <span class="font-mono text-xl font-bold tracking-tighter">[ RESSONÂNCIA_LABS ]</span>
+            <a href="#contato" class="text-xs font-mono bg-white text-black px-4 py-2 hover:bg-gray-200 transition">INICIAR PROTOCOLO</a>
+        </div>
+    </nav>
+
+    <header class="pt-32 pb-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="text-4xl md:text-6xl font-mono font-bold mb-6 tracking-tight">Arquitetura de Borda.<br>Segurança Autônoma.</h1>
+            <p class="text-gray-400 text-lg md:text-xl max-w-2xl mb-10 leading-relaxed">
+                Licenciamento e infraestrutura B2B de alta fidelidade. Auditamos LLMs de fronteira e construímos ecossistemas determinísticos para hardware restrito, eliminando alucinações matemáticas na origem.
+            </p>
+            <div class="flex gap-4 font-mono text-sm">
+                <span class="border-l-2 border-term-accent pl-3 text-gray-500">SYS.STATUS: <span class="text-green-500">OPERACIONAL</span></span>
+                <span class="border-l-2 border-term-accent pl-3 text-gray-500">NODE: <span class="text-white">RJ_BASE</span></span>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-20 px-4 bg-term-gray border-y border-tech">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="p-6 border-tech bg-term-black hover:border-term-accent transition">
+                <div class="text-term-accent font-mono mb-4">01. AI RED TEAMING</div>
+                <h3 class="text-xl font-bold mb-3">Auditoria Estrutural</h3>
+                <p class="text-gray-400 text-sm">Testes de estresse automatizados contra modelos de linguagem corporativos. Saturação de contexto e validação de salvaguardas.</p>
+            </div>
+            <div class="p-6 border-tech bg-term-black hover:border-term-accent transition">
+                <div class="text-term-accent font-mono mb-4">02. ACTIVE ZERO</div>
+                <h3 class="text-xl font-bold mb-3">Contenção Determinística</h3>
+                <p class="text-gray-400 text-sm">Núcleos lógicos proprietários que forçam o sistema a um estado nulo diante de incerteza, mitigando alucinações.</p>
+            </div>
+            <div class="p-6 border-tech bg-term-black hover:border-term-accent transition">
+                <div class="text-term-accent font-mono mb-4">03. EDGE COMPUTING</div>
+                <h3 class="text-xl font-bold mb-3">Infraestrutura Descentralizada</h3>
+                <p class="text-gray-400 text-sm">Execução de IA de alta performance em hardware de baixo custo, garantindo soberania e latência zero.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="py-24 px-4">
+        <div class="max-w-3xl mx-auto border-tech p-8 bg-term-gray">
+            <h2 class="text-2xl font-mono font-bold mb-2">Solicitar Auditoria de Infraestrutura</h2>
+            <p class="text-gray-400 mb-8 text-sm">Submeta o escopo técnico da sua operação para avaliação de viabilidade.</p>
+            
+            <form id="leadForm" class="flex flex-col gap-4">
+                <input type="text" id="empresa" placeholder="Empresa / Organização" class="bg-term-black border border-tech p-3 text-sm focus:outline-none focus:border-term-accent text-white" required>
+                <input type="email" id="email" placeholder="E-mail Corporativo" class="bg-term-black border border-tech p-3 text-sm focus:outline-none focus:border-term-accent text-white" required>
+                <textarea id="necessidade" placeholder="Descreva os requisitos de infraestrutura B2B..." rows="4" class="bg-term-black border border-tech p-3 text-sm focus:outline-none focus:border-term-accent text-white" required></textarea>
+                <button type="submit" class="bg-white text-black font-mono font-bold py-3 mt-4 hover:bg-gray-200 transition">INJETAR PAYLOAD</button>
+            </form>
+            <div id="statusMsg" class="mt-4 font-mono text-sm hidden"></div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('leadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const status = document.getElementById('statusMsg');
+            
+            // INSIRA SUAS CHAVES REAIS DO SUPABASE AQUI ANTES DE SALVAR
+            const SUPABASE_URL = 'COLE_AQUI_O_SEU_PROJECT_URL_REAL';
+            const SUPABASE_ANON_KEY = 'COLE_AQUI_A_SUA_CHAVE_ANON_PUBLIC_REAL';
+
+            const payload = {
+                empresa: document.getElementById('empresa').value,
+                email: document.getElementById('email').value,
+                necessidade: document.getElementById('necessidade').value
+            };
+
+            btn.innerText = 'PROCESSANDO...';
+            
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
+                    method: 'POST',
+                    headers: {
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                        'Content-Type': 'application/json',
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    status.classList.remove('hidden', 'text-red-500');
+                    status.classList.add('text-green-500');
+                    status.innerText = '[ ESTADO 1 ] Payload recebido. A matriz processará a conexão.';
+                    e.target.reset();
+                } else {
+                    throw new Error('Falha');
+                }
+            } catch (err) {
+                status.classList.remove('hidden', 'text-green-500');
+                status.classList.add('text-red-500');
+                status.innerText = '[ ESTADO 0 ] RUPTURA CRÍTICA. Falha de transmissão.';
+            }
+            btn.innerText = 'INJETAR PAYLOAD';
+        });
+    </script>
+</body>
+</html>
+
