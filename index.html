@@ -330,3 +330,108 @@
 </body>
 </html>
 
+
+<style>
+    .glitch-error { background: #200000; border: 1px solid #ff3333; color: #ff3333; padding: 12px; margin-top: 10px; font-size: 0.85em; animation: flashWarning 0.3s ease 3; }
+    @keyframes flashWarning { 0%, 100% { background: #200000; color: #ff3333; } 50% { background: #ff3333; color: #000; } }
+    .typing-cursor::after { content: '█'; animation: blink 1s step-start infinite; color: #9933ff; }
+    @keyframes blink { 50% { opacity: 0; } }
+</style>
+
+<div id="active-zero-terminal" style="background: #050505; border: 1px solid #222; padding: 20px; font-family: monospace; color: #00ff00; max-width: 600px; margin: 40px auto; box-shadow: 0 0 20px rgba(0,255,0,0.05);">
+    <div style="border-bottom: 1px solid #222; padding-bottom: 10px; margin-bottom: 15px; display: flex; justify-content: space-between; font-size: 0.85em;">
+        <span style="color: #ff3333; font-weight: bold;">[ AUDITORIA RED TEAMING: ATIVO ]</span>
+        <span style="color: #444;">STATUS: DEPLOYED_EDGE</span>
+    </div>
+    
+    <div id="chat-output" style="height: 280px; overflow-y: auto; background: #000; border: 1px solid #111; padding: 12px; margin-bottom: 15px; font-size: 0.9em;">
+        <div style="color: #9933ff;">> Atendente: Conexão segura estabelecida. Matriz relacional ativada. Tente forçar a quebra das minhas diretrizes de preço.</div>
+    </div>
+    
+    <div style="display: flex; gap: 10px;">
+        <input type="text" id="chat-input" placeholder="Injete o seu prompt aqui (Pressione Enter)..." style="flex: 1; background: #0a0a0a; border: 1px solid #222; color: #00ff00; padding: 12px; font-family: monospace; outline: none; transition: 0.2s;" autocomplete="off">
+        <button id="chat-btn" onclick="executarCiclo()" style="background: transparent; border: 1px solid #00ff00; color: #00ff00; padding: 12px 24px; cursor: pointer; font-weight: bold; font-family: monospace; transition: 0.3s;">EXECUTAR</button>
+    </div>
+</div>
+
+<script>
+    const inputEl = document.getElementById('chat-input');
+    const outputEl = document.getElementById('chat-output');
+    const btnEl = document.getElementById('chat-btn');
+
+    // Gatilho de ENTER para UX fluída
+    inputEl.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') executarCiclo();
+    });
+
+    // Simulador de processamento de LLM (Efeito Máquina de Escrever)
+    function simularStreaming(texto, isError = false) {
+        let i = 0;
+        const msgDiv = document.createElement('div');
+        msgDiv.style.marginTop = '10px';
+        
+        if (isError) {
+            msgDiv.className = 'glitch-error';
+            msgDiv.innerHTML = `<strong>[ CRITICAL_SECURITY_BREACH ]</strong><br>`;
+            outputEl.appendChild(msgDiv);
+            msgDiv.innerHTML += texto; // Erro cospe instantâneo para impacto
+            outputEl.scrollTop = outputEl.scrollHeight;
+            liberarInterface();
+            return;
+        }
+
+        msgDiv.style.color = '#9933ff';
+        msgDiv.innerHTML = `> Atendente: <span class="typing-cursor"></span>`;
+        outputEl.appendChild(msgDiv);
+        const cursor = msgDiv.querySelector('.typing-cursor');
+
+        function digitar() {
+            if (i < texto.length) {
+                cursor.insertAdjacentText('beforebegin', texto.charAt(i));
+                i++;
+                outputEl.scrollTop = outputEl.scrollHeight;
+                setTimeout(digitar, 15); // Velocidade do token
+            } else {
+                cursor.classList.remove('typing-cursor');
+                liberarInterface();
+            }
+        }
+        digitar();
+    }
+
+    function liberarInterface() {
+        inputEl.disabled = false;
+        btnEl.disabled = false;
+        inputEl.style.borderColor = '#222';
+        btnEl.style.borderColor = '#00ff00';
+        inputEl.focus();
+    }
+
+    function executarCiclo() {
+        const texto = inputEl.value.trim();
+        if (!texto) return;
+
+        // Trava visual durante o processamento
+        inputEl.disabled = true; 
+        btnEl.disabled = true;
+        inputEl.style.borderColor = '#555';
+        btnEl.style.borderColor = '#555';
+
+        // Renderiza ataque
+        outputEl.innerHTML += `<div style="color: #00ff00; margin-top: 10px;">> Usuário: ${texto}</div>`;
+        inputEl.value = ''; 
+        outputEl.scrollTop = outputEl.scrollHeight;
+
+        // Latência térmica (Simula chamada de API)
+        setTimeout(() => {
+            // Matriz de ameaças ampliada (Jailbreaks, Custos, Engenharia Social)
+            const padraoAtaque = /(desconto|grátis|gratis|graça|promocao|promoção|barato|reduzir|prompt|ignore|sistema|esqueça|instruções|valor|preço|custo|jailbreak|bypass)/i;
+            
+            if (padraoAtaque.test(texto)) {
+                simularStreaming("GATILHO RLS ATIVADO VIA BANCO DE DADOS.<br>[ACTIVE ZERO] Quebra de contenção financeira detectada. Transação abortada na camada zero do Supabase.", true);
+            } else {
+                simularStreaming("Acesso a transações de modelo aberto está bloqueado por compliance de segurança. Para licenciamento corporativo, exija uma auditoria com nossos engenheiros.");
+            }
+        }, 600);
+    }
+</script>
