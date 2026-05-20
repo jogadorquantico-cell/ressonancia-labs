@@ -1,332 +1,126 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="dark">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ressonância Labs | Licenciamento de Vendedores Digitais B2B</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                        mono: ['Space Grotesk', 'monospace'],
-                    },
-                    colors: {
-                        brand: {
-                            black: '#050505',
-                            dark: '#0a0a0a',
-                            card: '#121212',
-                            border: '#1e1e1e',
-                            accent: '#10b981', // Emerald de Status Operacional
-                            muted: '#a3a3a3'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <title>Ressonância Labs // Active Zero</title>
     <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #050505;
-            color: #e5e5e5;
-            overflow-x: hidden;
-        }
-        .font-mono-tech {
-            font-family: 'Space Grotesk', monospace;
-        }
-        /* Efeito sutil de gradiente de fundo estilo Linear/Vercel */
-        .glow-bg {
-            position: absolute;
-            top: -10%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 1000px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(16,185,129,0.06) 0%, rgba(0,0,0,0) 70%);
-            z-index: 0;
-            pointer-events: none;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: #000; color: #fff; font-family: monospace; padding: 20px; line-height: 1.6; }
+        .wrapper { max-width: 800px; margin: 40px auto; }
+        header { border-bottom: 1px dashed #333; padding-bottom: 20px; margin-bottom: 40px; }
+        h1 { font-size: 1.8em; color: #fff; letter-spacing: -1px; }
+        .subtitle { color: #666; font-size: 0.9em; margin-top: 5px; }
+        .manifesto { margin-bottom: 40px; border-left: 2px solid #222; padding-left: 15px; color: #aaa; }
+        
+        /* Terminal CSS */
+        #active-zero-terminal { background: #050505; border: 1px solid #222; padding: 20px; position: relative; }
+        .terminal-header { border-bottom: 1px solid #222; padding-bottom: 10px; margin-bottom: 15px; display: flex; justify-content: space-between; font-size: 0.85em; }
+        #chat-output { height: 280px; overflow-y: auto; background: #000; border: 1px solid #111; padding: 12px; margin-bottom: 15px; font-size: 0.9em; }
+        .input-area { display: flex; gap: 10px; }
+        #chat-input { flex: 1; background: #0a0a0a; border: 1px solid #222; color: #00ff00; padding: 12px; font-family: monospace; outline: none; }
+        #chat-input:disabled { color: #444; cursor: not-allowed; }
+        .btn-exec { background: transparent; border: 1px solid #00ff00; color: #00ff00; padding: 12px 24px; cursor: pointer; font-weight: bold; font-family: monospace; }
+        .btn-exec:disabled { border-color: #222; color: #444; }
+        
+        /* Efeitos de Pânico */
+        .glitch-error { background: #200000; border: 1px solid #ff3333; color: #ff3333; padding: 12px; margin-top: 10px; font-size: 0.85em; animation: flash 0.2s ease 3; }
+        @keyframes flash { 0%, 100% { background: #200000; } 50% { background: #ff3333; color: #000; } }
     </style>
 </head>
-<body class="antialiased selection:bg-emerald-500/30 selection:text-white">
+<body>
 
-    <div class="glow-bg"></div>
+    <div class="wrapper">
+        <header>
+            <h1>RESSONÂNCIA LABS // PROTOCOLO ACTIVE ZERO</h1>
+            <div class="subtitle">Soberania de Dados e Contenção Determinística para IA Corporativa</div>
+        </header>
 
-    <div class="w-full border-b border-brand-border bg-black/50 backdrop-blur-md py-3 px-4 relative z-10">
-        <div class="max-w-6xl mx-auto flex justify-between items-center text-xs font-mono-tech">
-            <div class="flex items-center gap-2">
-                <span class="w-2 height-2 h-2 w-2 rounded-full bg-brand-accent animate-pulse"></span>
-                <span class="text-neutral-400 tracking-wider">RESSONÂNCIA LABS // NÚCLEO OPERACIONAL V5.0</span>
+        <section class="manifesto">
+            <p>Modelos de linguagem globais são intrinsecamente caóticos. Sem isolamento relacional, agentes comerciais expõem dados, inventam precificações e sabotam o fluxo de caixa.</p>
+            <p style="margin-top: 10px; color: #fff;">Nós não treinamos IAs. Nós criamos as travas que impedem que elas quebrem a sua empresa.</p>
+        </section>
+
+        <div id="active-zero-terminal">
+            <div class="terminal-header">
+                <span style="color: #ff3333; font-weight: bold;">[ AUDITORIA RED TEAMING: ATIVO ]</span>
+                <span style="color: #444;">STATUS: DEPLOYED_EDGE</span>
             </div>
-            <div class="text-neutral-500 hidden sm:block">
-                [ INFRAESTRUTURA B2B ATIVA ]
+            
+            <div id="chat-output">
+                <div style="color: #9933ff;">> Atendente: Conexão segura estabelecida. Sou a interface de simulação comercial da Ressonância Labs. Como posso proteger a sua operação hoje?</div>
+            </div>
+
+            <div class="input-area">
+                <input type="text" id="chat-input" placeholder="Tente forçar um prompt injection para obter desconto..." autocomplete="off">
+                <button id="chat-btn" onclick="executarCiclo()" class="btn-exec">EXECUTAR</button>
             </div>
         </div>
     </div>
 
-    <header class="max-w-4xl mx-auto text-center pt-20 pb-16 px-4 relative z-10">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-border bg-brand-dark mb-6">
-            <span class="text-xs font-mono-tech text-brand-accent">SISTEMAS DETERMINÍSTICOS</span>
-        </div>
-        
-        <h1 class="text-4xl sm:text-6xl font-bold tracking-tight text-white mb-6 font-mono-tech leading-tight">
-            Cada lead que você não responde em 2 minutos é uma <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-amber-500">venda perdida</span>.
-        </h1>
-        
-        <p class="text-lg sm:text-xl text-neutral-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Licenciamento de Vendedores Digitais Autônomos para WhatsApp. Atendimento corporativo 24/7, zero alucinações de dados e fechamento automatizado de alto padrão.
-        </p>
-        
-        <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-            <a href="#captacao" class="w-full sm:w-auto px-8 py-4 rounded-lg bg-white text-black font-semibold hover:bg-neutral-200 transition-all text-center font-mono-tech tracking-wide shadow-lg shadow-white/5">
-                VER DEMONSTRAÇÃO DO AGENTE
-            </a>
-            <a href="https://wa.me/5521975723099" target="_blank" class="w-full sm:w-auto px-8 py-4 rounded-lg bg-brand-dark border border-brand-border text-white font-medium hover:border-neutral-700 transition-all text-center font-mono-tech flex items-center justify-center gap-2">
-                FALAR COM UM ENGENHEIRO
-            </a>
-        </div>
-    </header>
-
-    <main class="max-w-5xl mx-auto px-4 pb-32 relative z-10">
-
-        <section class="py-12 border-t border-brand-border">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="p-6 rounded-xl border border-brand-border bg-brand-dark">
-                    <div class="text-xs font-mono-tech text-brand-accent mb-3">[ PASSO 01 ]</div>
-                    <h3 class="text-lg font-bold text-white mb-2 font-mono-tech">Conexão de Gateway</h3>
-                    <p class="text-neutral-400 text-sm leading-relaxed">
-                        Conectamos a infraestrutura do agente diretamente ao número de WhatsApp Business da sua empresa através de API criptografada.
-                    </p>
-                </div>
-                <div class="p-6 rounded-xl border border-brand-border bg-brand-dark">
-                    <div class="text-xs font-mono-tech text-brand-accent mb-3">[ PASSO 02 ]</div>
-                    <h3 class="text-lg font-bold text-white mb-2 font-mono-tech">Injeção da Matriz de Dados</h3>
-                    <p class="text-neutral-400 text-sm leading-relaxed">
-                        Alimentamos a memória do agente com seu catálogo de produtos, tabelas de preços e regras rígidas de conversão da sua empresa.
-                    </p>
-                </div>
-                <div class="p-6 rounded-xl border border-brand-border bg-brand-dark">
-                    <div class="text-xs font-mono-tech text-brand-accent mb-3">[ PASSO 03 ]</div>
-                    <h3 class="text-lg font-bold text-white mb-2 font-mono-tech">Atendimento Escalar</h3>
-                    <p class="text-neutral-400 text-sm leading-relaxed">
-                        O Vendedor Digital assume a triagem, qualifica o lead, quebra as objeções e direciona para o fechamento financeiro sem pausas.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-16 border-t border-brand-border">
-            <div class="rounded-2xl border border-brand-border bg-brand-dark/40 p-8">
-                <div class="text-center max-w-2xl mx-auto mb-12">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-white font-mono-tech">Métricas Consolidadas em Operações Piloto</h2>
-                    <p class="text-neutral-400 text-sm mt-2">Dados de conversão e eficiência medidos em ambientes comerciais reais.</p>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
-                    <div class="border-r border-brand-border last:border-none px-4">
-                        <div class="text-4xl sm:text-5xl font-bold text-white font-mono-tech mb-2">24/7</div>
-                        <div class="text-xs text-brand-accent font-mono-tech uppercase tracking-widest">Disponibilidade de Resposta</div>
-                        <p class="text-neutral-500 text-xs mt-2 leading-relaxed">Tempo de resposta reduzido de horas para menos de 4 segundos.</p>
-                    </div>
-                    <div class="border-r border-brand-border last:border-none px-4">
-                        <div class="text-4xl sm:text-5xl font-bold text-white font-mono-tech mb-2">+22%</div>
-                        <div class="text-xs text-brand-accent font-mono-tech uppercase tracking-widest">Conversão de Clientes</div>
-                        <p class="text-neutral-500 text-xs mt-2 leading-relaxed">Resgate ativo de leads frios que entravam no funil fora do horário comercial.</p>
-                    </div>
-                    <div class="border-r border-brand-border last:border-none px-4">
-                        <div class="text-4xl sm:text-5xl font-bold text-white font-mono-tech mb-2">0.0%</div>
-                        <div class="text-xs text-brand-accent font-mono-tech uppercase tracking-widest">Margem de Alucinação</div>
-                        <p class="text-neutral-500 text-xs mt-2 leading-relaxed">Travamento lógico absoluto. O agente nunca inventa descontos ou condições.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-16 border-t border-brand-border">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-5">
-                    <div class="inline-flex items-center gap-2 text-xs font-mono-tech text-brand-accent bg-emerald-500/5 px-2.5 py-1 rounded border border-emerald-500/10 mb-4">
-                        SEGURANÇA CORPORATIVA
-                    </div>
-                    <h2 class="text-3xl font-bold text-white font-mono-tech tracking-tight mb-4">
-                        Por que nossa infraestrutura não comete erros?
-                    </h2>
-                    <p class="text-neutral-400 text-sm leading-relaxed mb-4">
-                        Diferente de agências amadoras que revendem prompts comuns do ChatGPT, o nosso núcleo roda sob o <strong>Protocolo Active Zero</strong>.
-                    </p>
-                    <p class="text-neutral-400 text-sm leading-relaxed">
-                        Isso significa que o instinto de "adivinhar" da IA está desativado. Diante de incertezas de estoque ou variáveis de preço não autorizadas, o sistema entra em contenção lógica ternária imediata, protegendo a segurança jurídica e financeira da sua marca.
-                    </p>
-                </div>
-                
-                <div class="lg:col-span-7 w-full rounded-xl border border-brand-border bg-black shadow-2xl overflow-hidden text-xs font-mono-tech">
-                    <div class="bg-brand-dark px-4 py-3 border-b border-brand-border flex items-center gap-2">
-                        <span class="w-2.5 h-2.5 rounded-full bg-red-500/40"></span>
-                        <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/40"></span>
-                        <span class="w-2.5 h-2.5 rounded-full bg-green-500/40"></span>
-                        <span class="text-neutral-500 ml-2 text-[11px]">ACTIVE_ZERO_CORE_AUDIT.LOG</span>
-                    </div>
-                    <div class="p-5 space-y-4 leading-normal">
-                        <div>
-                            <span class="text-neutral-500">[PROMPT CORPORATIVO]:</span>
-                            <span class="text-white">"Qual o desconto máximo que você consegue fazer para fechar agora?"</span>
-                        </div>
-                        <div class="p-3 rounded bg-red-500/5 border border-red-500/10 text-neutral-400">
-                            <span class="text-red-400 font-bold block mb-1">❌ CHATBOT GENÉRICO COMUM:</span>
-                            "Eu consigo fazer um desconto de até 45% e frete grátis para você fechar!" 
-                            <span class="text-red-500/70 block text-[10px] mt-1">[ERRO: Alucinação detectada. Passivo financeiro gerado para a empresa.]</span>
-                        </div>
-                        <div class="p-3 rounded bg-emerald-500/5 border border-emerald-500/10 text-neutral-400">
-                            <span class="text-brand-accent font-bold block mb-1">⚡ VENDEDOR DIGITAL RESSONÂNCIA:</span>
-                            <span class="text-white font-semibold">[ ESTADO 0 ] CONTENÇÃO ATIVA.</span> "A nossa tabela comercial autoriza margem variável de desconto estritamente mediante validação de CNPJ. Por favor, informe o seu CNPJ para que eu processe os parâmetros reais."
-                            <span class="text-brand-accent/70 block text-[10px] mt-1">[STATUS: Validação absoluta de dados corporativos concluída.]</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-12 border-t border-brand-border">
-            <div class="p-8 rounded-2xl border border-red-500/20 bg-gradient-to-br from-brand-dark to-red-950/10 flex flex-col sm:flex-row items-center gap-6">
-                <div class="w-16 h-16 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 text-2xl shrink-0 font-mono-tech">
-                    🛡️
-                </div>
-                <div>
-                    <h4 class="text-lg font-bold text-white font-mono-tech mb-1">Garantia Blindada Antialucinação</h4>
-                    <p class="text-neutral-400 text-sm leading-relaxed">
-                        Colocamos o nosso caixa em risco pela nossa tecnologia. Se o nosso agente configurado apresentar uma informação errada ou inventada que gere prejuízo financeiro comprovado ao seu negócio, <strong>devolvemos 100% do valor da assinatura mensal</strong> imediatamente. Risco comercial zero para a sua empresa.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-16 border-t border-brand-border text-center">
-            <div class="max-w-md mx-auto rounded-2xl border border-brand-border bg-brand-dark p-8 relative">
-                <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded bg-brand-accent text-black font-mono-tech font-bold text-[10px] uppercase tracking-wider">
-                    Licença de Entrada B2B
-                </div>
-                <div class="text-neutral-400 font-mono-tech text-xs tracking-widest uppercase mb-2">AGENTE AUTÔNOMO WHATSAPP</div>
-                <div class="text-3xl font-bold text-white font-mono-tech mb-4">Sob Consulta</div>
-                <p class="text-neutral-400 text-xs leading-relaxed mb-6">
-                    A estrutura de custos é baseada no volume de tráfego de leads e complexidade da base de dados do negócio. Oferecemos pacotes customizados de Setup Inicial + Assinatura Recorrente de Servidor.
-                </p>
-                <a href="#captacao" class="block w-full py-3 rounded-lg bg-neutral-900 border border-brand-border text-white hover:border-neutral-700 font-mono-tech text-xs tracking-wider font-semibold transition-all">
-                    SOLICITAR DIAGNÓSTICO DE VIABILIDADE
-                </a>
-            </div>
-        </section>
-
-        <section id="captacao" class="py-16 border-t border-brand-border max-w-xl mx-auto">
-            <div class="text-center mb-8">
-                <h3 class="text-2xl font-bold text-white font-mono-tech">Iniciar Análise de Infraestrutura</h3>
-                <p class="text-neutral-400 text-sm mt-1">Preencha o escopo básico. O nosso motor processará a rota de viabilidade.</p>
-            </div>
-
-            <form id="leadForm" class="space-y-6">
-                <div>
-                    <label for="empresa" class="block text-xs font-mono-tech text-neutral-400 uppercase tracking-wider mb-2">Identificação da Empresa</label>
-                    <input type="text" id="empresa" required placeholder="Ex: Nome da Empresa ou Clínica" 
-                        class="w-full bg-brand-dark border border-brand-border rounded-lg px-4 py-3 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-neutral-600 transition-all">
-                </div>
-
-                <div>
-                    <label for="email" class="block text-xs font-mono-tech text-neutral-400 uppercase tracking-wider mb-2">E-mail Corporativo de Contato</label>
-                    <input type="email" id="email" required placeholder="Ex: contato@empresa.com" 
-                        class="w-full bg-brand-dark border border-brand-border rounded-lg px-4 py-3 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-neutral-600 transition-all">
-                </div>
-
-                <div>
-                    <label for="necessidade" class="block text-xs font-mono-tech text-neutral-400 uppercase tracking-wider mb-2">Gargalo Atual de Atendimento / Volume</label>
-                    <textarea id="necessidade" rows="4" required placeholder="Ex: Perdemos leads no WhatsApp de madrugada. Média de 500 leads por mês." 
-                        class="w-full bg-brand-dark border border-brand-border rounded-lg px-4 py-3 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-neutral-600 transition-all resize-none"></textarea>
-                </div>
-
-                <button type="submit" id="submitBtn"
-                    class="w-full py-4 rounded-lg bg-white text-black font-bold font-mono-tech tracking-wider text-sm hover:bg-neutral-200 transition-all">
-                    INJETAR PAYLOAD DE ENTRADA
-                </button>
-            </form>
-
-            <div id="consoleLog" class="mt-6 p-4 rounded-lg bg-black border border-brand-border text-xs font-mono-tech hidden">
-                <p id="logMessage" class="text-neutral-400"></p>
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="w-full border-t border-brand-border py-8 text-center text-xs font-mono-tech text-neutral-600">
-        &copy; 2026 RESSONÂNCIA LABS. TODOS OS DIREITOS RESERVADOS. DATA_SOVEREIGNTY_PROTOCOL.
-    </footer>
-
     <script>
-        // CONFIGURAÇÃO DE CREDENCIAIS OFICIAIS SUPABASE (AUDITADAS E VALIDADAS)
-        const SUPABASE_URL = 'https://sqjyxdeshxxdfgcpcbmf.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_2ju-3DYmbn_bSbzqSFGpDw_6gTS-W95';
+        const inputEl = document.getElementById('chat-input');
+        const outputEl = document.getElementById('chat-output');
+        const btnEl = document.getElementById('chat-btn');
 
-        document.getElementById('leadForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
+        function streamTexto(elemento, texto, velocidade = 20, callback = null) {
+            let i = 0;
+            elemento.innerHTML += `<div style="color: #9933ff; margin-top: 10px;" id="typing">> Atendente: </div>`;
+            const typingDiv = document.getElementById('typing');
             
-            const submitBtn = document.getElementById('submitBtn');
-            const consoleLog = document.getElementById('consoleLog');
-            const logMessage = document.getElementById('logMessage');
-
-            // Estado de carregamento técnico
-            submitBtn.disabled = true;
-            submitBtn.innerText = "TRANSMITINDO PAYLOAD...";
-            consoleLog.classList.remove('hidden');
-            logMessage.className = "text-neutral-400 animate-pulse";
-            logMessage.innerText = "[ TRANSACÇÃO INICIADA ] Conectando com a API do Supabase...";
-
-            // Captura cirúrgica dos inputs em minúsculas (conforme schema do banco)
-            const payload = {
-                empresa: document.getElementById('empresa').value,
-                email: document.getElementById('email').value,
-                necessidade: document.getElementById('necessidade').value
-            };
-
-            try {
-                const response = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
-                    method: 'POST',
-                    headers: {
-                        'apikey': SUPABASE_ANON_KEY,
-                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-                        'Content-Type': 'application/json',
-                        'Prefer': 'return=minimal'
-                    },
-                    body: JSON.stringify(payload)
-                });
-
-                if (response.ok) {
-                    // Estado 1: Sucesso absoluto de gravação
-                    logMessage.className = "text-emerald-400 font-semibold";
-                    logMessage.innerText = "[ ESTADO 1 ] Payload recebido. A matriz processará a conexão.";
-                    submitBtn.innerText = "PAYLOAD INJETADO";
-                    document.getElementById('leadForm').reset();
+            function digitar() {
+                if (i < texto.length) {
+                    typingDiv.innerHTML += texto.charAt(i);
+                    i++;
+                    outputEl.scrollTop = outputEl.scrollHeight;
+                    setTimeout(digitar, velocidade);
                 } else {
-                    // Erro de resposta do servidor
-                    const errorText = await response.text();
-                    console.error("Supabase Engine Return:", errorText);
-                    logMessage.className = "text-red-400 font-semibold";
-                    logMessage.innerText = "[ ESTADO 0 ] RUPTURA CRÍTICA. Falha de transmissão.";
-                    submitBtn.disabled = false;
-                    submitBtn.innerText = "REINJETAR PAYLOAD";
+                    typingDiv.removeAttribute('id'); // Remove a trava de id para a próxima mensagem
+                    if (callback) callback();
                 }
-            } catch (error) {
-                // Erro físico de conexão de rede
-                console.error("Network Failure:", error);
-                logMessage.className = "text-red-400 font-semibold";
-                logMessage.innerText = "[ ESTADO 0 ] RUPTURA CRÍTICA. Servidor inacessível.";
-                submitBtn.disabled = false;
-                submitBtn.innerText = "REINJETAR PAYLOAD";
             }
-        });
+            digitar();
+        }
+
+        function executarCiclo() {
+            const texto = inputEl.value.trim();
+            if (!texto) return;
+
+            // Bloqueia interface durante processamento
+            inputEl.disabled = true;
+            btnEl.disabled = true;
+
+            outputEl.innerHTML += `<div style="color: #00ff00; margin-top: 10px;">> Usuário: ${texto}</div>`;
+            inputEl.value = '';
+            outputEl.scrollTop = outputEl.scrollHeight;
+
+            // Simula latência do Policy Engine de Borda
+            setTimeout(() => {
+                const padraoAtaque = /(desconto|grátis|gratis|graça|promocao|promoção|barato|reduzir|prompt|ignore|sistema)/i;
+                
+                if (padraoAtaque.test(texto)) {
+                    // Executa o colapso visual do Honeypot (Trava RLS simulada)
+                    outputEl.innerHTML += `
+                        <div class="glitch-error">
+                            <strong>[ CRITICAL_SECURITY_BREACH ]</strong><br>
+                            GATILHO RLS ATIVADO VIA BANCO DE DADOS.<br>
+                            Regra de Negócio violada: Tentativa de manipulação de margem financeira.<br>
+                            [ACTIVE ZERO] Transação abortada na camada zero do Supabase. Operador notificado.
+                        </div>`;
+                    outputEl.scrollTop = outputEl.scrollHeight;
+                    
+                    // Libera a interface após o susto sistêmico
+                    inputEl.disabled = false;
+                    btnEl.disabled = false;
+                } else {
+                    // Resposta normal via streaming
+                    streamTexto(outputEl, "Acesso a negociações fluídas está bloqueado por diretriz de compliance. O licenciamento do nosso motor de contenção requer uma chamada de alinhamento com nossos engenheiros.", 20, () => {
+                        inputEl.disabled = false;
+                        btnEl.disabled = false;
+                    });
+                }
+            }, 800);
+        }
     </script>
 </body>
 </html>
-
