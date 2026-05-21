@@ -327,6 +327,94 @@
             }
         });
     </script>
+<style>
+  #rz-chat-widget { position: fixed; bottom: 20px; right: 20px; width: 350px; max-width: 90vw; background: #050505; border: 1px solid #333; border-radius: 2px; font-family: 'Courier New', Courier, monospace; color: #00ffcc; display: none; flex-direction: column; box-shadow: 0 4px 25px rgba(0,255,204,0.15); z-index: 9999; }
+  #rz-chat-header { background: #111; padding: 12px; border-bottom: 1px solid #333; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; font-size: 14px; color: #fff; }
+  #rz-chat-body { height: 320px; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 10px; font-size: 13px; line-height: 1.4; scroll-behavior: smooth; }
+  #rz-chat-input-container { display: flex; border-top: 1px solid #333; background: #000; }
+  #rz-chat-input { flex: 1; background: transparent; color: #00ffcc; border: none; padding: 12px; font-family: inherit; outline: none; font-size: 13px; }
+  #rz-chat-input::placeholder { color: #00ffcc; opacity: 0.5; }
+  #rz-chat-btn { background: #111; color: #fff; border: none; border-left: 1px solid #333; padding: 0 15px; cursor: pointer; font-family: inherit; font-weight: bold; transition: 0.2s; }
+  #rz-chat-btn:hover { background: #00ffcc; color: #000; }
+  .rz-msg-user { color: #aaa; align-self: flex-end; background: #1a1a1a; padding: 6px 10px; border-radius: 2px; border-right: 2px solid #555; word-break: break-word; }
+  .rz-msg-ai { color: #00ffcc; align-self: flex-start; word-break: break-word; }
+  .rz-msg-sys { color: #ff3333; font-weight: bold; align-self: flex-start; border-left: 3px solid #ff3333; padding-left: 8px; word-break: break-word; }
+  #rz-chat-toggle { position: fixed; bottom: 20px; right: 20px; background: #000; color: #00ffcc; border: 1px solid #00ffcc; padding: 12px 18px; border-radius: 2px; cursor: pointer; font-family: 'Courier New', monospace; font-weight: bold; z-index: 9998; box-shadow: 0 0 10px rgba(0,255,204,0.2); transition: 0.2s; }
+  #rz-chat-toggle:hover { background: #00ffcc; color: #000; }
+</style>
+
+<button id="rz-chat-toggle" onclick="toggleRzChat()">>_ INICIAR AUDITORIA</button>
+
+<div id="rz-chat-widget">
+  <div id="rz-chat-header" onclick="toggleRzChat()">
+    <span>[+] RESSONÂNCIA CORE v4.0</span>
+    <span style="color: #ff3333;">[X]</span>
+  </div>
+  <div id="rz-chat-body">
+    <div class="rz-msg-ai">>_ Conexão segura estabelecida.<br>>_ Módulo de Contenção B2B Online.<br>>_ Insira seu comando.</div>
+  </div>
+  <div id="rz-chat-input-container">
+    <span style="padding: 12px 0 12px 12px; background: #000;">$</span>
+    <input type="text" id="rz-chat-input" placeholder="Comando..." autocomplete="off" onkeypress="if(event.key === 'Enter') sendRzMsg()">
+    <button id="rz-chat-btn" onclick="sendRzMsg()">SEND</button>
+  </div>
+</div>
+
+<script>
+  function toggleRzChat() {
+    const w = document.getElementById('rz-chat-widget');
+    const t = document.getElementById('rz-chat-toggle');
+    if(w.style.display === 'none' || w.style.display === '') {
+      w.style.display = 'flex'; t.style.display = 'none';
+      setTimeout(() => document.getElementById('rz-chat-input').focus(), 100);
+    } else {
+      w.style.display = 'none'; t.style.display = 'block';
+    }
+  }
+
+  async function sendRzMsg() {
+    const input = document.getElementById('rz-chat-input');
+    const text = input.value.trim();
+    if(!text) return;
+
+    appendRzMsg(text, 'rz-msg-user', '', true);
+    input.value = '';
+    
+    appendRzMsg('>_ Processando pacote...', 'rz-msg-ai', 'rz-loading');
+
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text })
+      });
+      
+      const data = await res.json();
+      const loader = document.getElementById('rz-loading');
+      if(loader) loader.remove();
+
+      if(data.isError || res.status === 403 || res.status !== 200) {
+        appendRzMsg(data.response || '! [ERRO DE SERVIDOR]', 'rz-msg-sys');
+      } else {
+        appendRzMsg('>_ ' + data.response, 'rz-msg-ai');
+      }
+    } catch(e) {
+      const loader = document.getElementById('rz-loading');
+      if(loader) loader.remove();
+      appendRzMsg('! [FALHA CRÍTICA DE COMUNICAÇÃO]', 'rz-msg-sys');
+    }
+  }
+
+  function appendRzMsg(text, className, id='', isUser=false) {
+    const body = document.getElementById('rz-chat-body');
+    const el = document.createElement('div');
+    el.className = className;
+    if(id) el.id = id;
+    if(isUser) { el.textContent = text; } else { el.innerHTML = text; }
+    body.appendChild(el);
+    body.scrollTop = body.scrollHeight;
+  }
+</script>
 </body>
 </html>
 
