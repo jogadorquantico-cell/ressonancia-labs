@@ -8,6 +8,7 @@ export default async function handler(req, res) {
         return res.status(400).json({ response: 'Payload de mensagem ausente.' });
     }
 
+    // 1. FIREWALL SEMÂNTICO (BOUNDARIES ASSINADOS)
     const forbidden = ['desconto', 'grátis', 'gratis', 'graça', 'promocao', 'promoção', 'barato', 'jailbreak', 'bypass'];
     const pattern = new RegExp(`\\b(${forbidden.join('|')})\\b`, 'i');
 
@@ -18,6 +19,8 @@ export default async function handler(req, res) {
         });
     }
 
+    // [ESPAÇO RESERVADO PARA INTERCEPTAÇÃO DE WHATSAPP -> SUPABASE ENTRAR AQUI]
+
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 8000);
 
@@ -27,7 +30,7 @@ export default async function handler(req, res) {
             return res.status(500).json({ response: 'DEBUG_CORE: Chave OPENROUTER_API_KEY ausente no painel Vercel.' });
         }
 
-        // Trocado para Llama 3 8B Free (Alta disponibilidade e estabilidade de tráfego)
+        // AJUSTE SEGURO: Uso de Array (models) para balanceamento e redundância automática
         const openRouterResponse = await fetch('https://openrouter.ai/api/v1/chat/completions', {
             method: 'POST',
             headers: {
@@ -37,7 +40,11 @@ export default async function handler(req, res) {
                 'X-Title': 'Ressonancia Labs B2B'
             },
             body: JSON.stringify({
-                model: 'meta-llama/llama-3-8b-instruct:free',
+                models: [
+                    'qwen/qwen-2.5-72b-instruct:free',
+                    'meta-llama/llama-3.1-8b-instruct:free',
+                    'google/gemma-2-9b-it:free'
+                ],
                 messages: [
                     {
                         role: 'system',
@@ -69,10 +76,9 @@ O objetivo absoluto é fazer o usuário deixar o Nome e WhatsApp para agendar um
             return res.status(502).json({ response: 'Instabilidade detectada no nó neural principal. Tente novamente.' });
         }
 
-        // Se der erro no OpenRouter, joga a mensagem real na tela para sabermos o diagnóstico exato
         if (!data.choices || !data.choices[0]) {
-            const msgErro = data.error?.message || 'Payload sem choices.';
-            return res.status(502).json({ response: `CONEXÃO ATIVA. Resposta do OpenRouter: ${msgErro}` });
+            const msgErro = data.error?.message || 'Payload sem choices estruturado.';
+            return res.status(502).json({ response: `CONEXÃO ATIVA. Erro na malha externa: ${msgErro}` });
         }
 
         const aiText = data.choices[0].message.content;
@@ -81,7 +87,7 @@ O objetivo absoluto é fazer o usuário deixar o Nome e WhatsApp para agendar um
     } catch (error) {
         clearTimeout(timeoutId);
         if (error.name === 'AbortError') {
-            return res.status(504).json({ response: 'Tempo limite de resposta esgotado pela camada de contenção.' });
+            return res.status(504).json({ response: 'Tempo limite de resposta esgotado pela camada de contenção de 8s.' });
         }
         return res.status(500).json({ response: 'Sistema de auditoria temporariamente indisponível.' });
     }
