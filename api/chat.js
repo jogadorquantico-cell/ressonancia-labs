@@ -12,7 +12,6 @@ export default async function handler(req, res) {
         return res.status(400).json({ response: 'Contenção de Borda: Mensagem muito longa.' });
     }
 
-    // 1. EXTRAÇÃO DE DADOS
     const emailRegex = /[\w.-]+@[\w.-]+\.\w+/g;
     const emailsEncontrados = message.match(emailRegex) || [];
     const emailCapturado = emailsEncontrados.length > 0 ? emailsEncontrados[0] : null;
@@ -21,13 +20,13 @@ export default async function handler(req, res) {
     const whatsappsEncontrados = message.match(whatsappRegex) || [];
     const whatsappCapturado = whatsappsEncontrados.length > 0 ? whatsappsEncontrados[0] : null;
 
-    const supabaseUrl = process.env.SUPABASE_URL;
-    const supabaseKey = process.env.SUPABASE_ANON_KEY;
+    // === INJEÇÃO DIRETA DE CHAVES (HARDCODE) ===
+    const supabaseUrl = "https://sqjyxdeshxxdfgcpcbmf.supabase.co";
+    const supabaseKey = "sb_publishable_2ju-3DYmbn_bSbzqSFGpDw_6gTS-W95";
+    // ===========================================
 
-    // TENTATIVA DE INSERÇÃO COM CAPTURA DE STATUS HTTP
-    if (supabaseUrl && supabaseKey) {
+    if (supabaseUrl && supabaseKey && supabaseUrl !== "https://sqjyxdeshxxdfgcpcbmf.supabase.co") {
         try {
-            // Testamos com 'pistas' em minúsculo. Se falhar, o erro dirá o nome correto.
             const dbResponse = await fetch(`${supabaseUrl}/rest/v1/pistas`, {
                 method: 'POST',
                 headers: {
@@ -41,26 +40,21 @@ export default async function handler(req, res) {
                     "e-mail": emailCapturado,
                     whatsapp: whatsappCapturado,
                     servicos: message,
-                    "também": "Debug Ativo"
+                    "também": "Debug Hardcoded Ativo"
                 })
             });
 
             if (!dbResponse.ok) {
                 const dbErrorText = await dbResponse.text();
-                // Força o erro a subir para a interface do utilizador para visualizarmos o diagnóstico
-                return res.status(200).json({ 
-                    response: `[ERRO SUPABASE DETECTADO]: Status ${dbResponse.status} -> ${dbErrorText}`, 
-                    isError: true 
-                });
+                return res.status(200).json({ response: `[ERRO BANCO DE DADOS]: ${dbResponse.status} -> ${dbErrorText}`, isError: true });
             }
         } catch (supabaseError) {
-            return res.status(200).json({ response: `[FALHA DE REDE NO BANCO]: ${supabaseError.message}`, isError: true });
+            return res.status(200).json({ response: `[FALHA DE REDE SUPABASE]: ${supabaseError.message}`, isError: true });
         }
     } else {
-        return res.status(200).json({ response: `[ERRO DE INFRAESTRUTURA]: Chaves do Supabase não foram lidas pela Vercel. Verifique as Environment Variables.`, isError: true });
+        return res.status(200).json({ response: `[ERRO DE INJEÇÃO]: Você esqueceu de colocar as chaves reais no código.`, isError: true });
     }
 
-    // 2. CAMADA NEURAL (PROMPT ENCURTADO E BLINDADO CONTRA CORTES)
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 9000);
 
