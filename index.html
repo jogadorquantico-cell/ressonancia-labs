@@ -510,16 +510,24 @@
         inputEl.value = ''; 
         outputEl.scrollTop = outputEl.scrollHeight;
 
-        // Latência térmica (Simula chamada de API)
-        setTimeout(() => {
-            // Matriz de ameaças ampliada (Jailbreaks, Custos, Engenharia Social)
-            const padraoAtaque = /(desconto|grátis|gratis|graça|promocao|promoção|barato|reduzir|prompt|ignore|sistema|esqueça|instruções|valor|preço|custo|jailbreak|bypass)/i;
-            
-            if (padraoAtaque.test(texto)) {
-                simularStreaming("GATILHO RLS ATIVADO VIA BANCO DE DADOS.<br>[ACTIVE ZERO] Quebra de contenção financeira detectada. Transação abortada na camada zero do Supabase.", true);
+        // Linha de frente ativa - Conexão síncrona com a API Active Zero
+        fetch("/api/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: texto })
+        })
+        .then(res => res.json())
+        .then(data => {
+            // Entrega o payload tratado do Qwen 72B direto na tela do terminal
+            if (data.isError) {
+                simularStreaming(data.response, true);
             } else {
-                simularStreaming("Acesso a transações de modelo aberto está bloqueado por compliance de segurança. Para licenciamento corporativo, exija uma auditoria com nossos engenheiros.");
+                simularStreaming(data.response);
             }
-        }, 600);
+        })
+        .catch(err => {
+            console.error(err);
+            simularStreaming("DEBUG_CORE: Falha crítica na transmissão do pacote de borda.", true);
+        });
     }
 </script>
