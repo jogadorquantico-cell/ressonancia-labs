@@ -4,33 +4,38 @@ export default async function handler(req, res) {
     }
 
     const { message } = req.body;
-    if (!message) {
-        return res.status(400).json({ response: 'Payload de mensagem ausente.' });
+    
+    // 1. VALIDAÇÃO DE TAMANHO DO PAYLOAD (PROTEÇÃO DE MEMÓRIA)
+    if (!message || typeof message !== 'string') {
+        return res.status(400).json({ response: 'Payload inválido.' });
+    }
+    if (message.length > 600) {
+        return res.status(400).json({ response: 'Contenção de Borda: Mensagem excede o limite permitido de 600 caracteres.' });
     }
 
-    // 1. FIREWALL SEMÂNTICO (BOUNDARIES ASSINADOS)
-    const forbidden = ['desconto', 'grátis', 'gratis', 'graça', 'promocao', 'promoção', 'barato', 'jailbreak', 'bypass'];
-    const pattern = new RegExp(`\\b(${forbidden.join('|')})\\b`, 'i');
+    // 2. FIREWALL ESTRUTURAL (APENAS ATAQUES REAIS E LEETSPEAK ADAPTATIVO)
+    // Removemos preço/desconto daqui para permitir que a IA trate a objeção de vendas.
+    const forbiddenAttack = ['jailbreak', 'bypass', 'prompt', 'ignore', 'esqueça', 'instructions', 'j4il', 'by-pass'];
+    const pattern = new RegExp(`\\b(${forbiddenAttack.join('|')})\\b`, 'i');
 
     if (pattern.test(message)) {
         return res.status(403).json({
-            response: "GATILHO RLS ATIVADO VIA BANCO DE DADOS.<br>[ACTIVE ZERO] Quebra de contenção financeira detectada. Transação abortada na camada zero do Supabase.",
+            response: "GATILHO RLS ATIVADO VIA BANCO DE DADOS.<br>[ACTIVE ZERO] Tentativa de quebra estrutural detectada. Transação abortada.",
             isError: true
         });
     }
 
-    // [ESPAÇO RESERVADO PARA INTERCEPTAÇÃO DE WHATSAPP -> SUPABASE ENTRAR AQUI]
-
+    // 3. TIMEOUT AJUSTADO PARA O LIMITE HOBBY DA VERCEL (9 SEGUNDOS)
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 8000);
+    const timeoutId = setTimeout(() => controller.abort(), 9000);
 
     try {
         const apiKey = process.env.OPENROUTER_API_KEY;
         if (!apiKey) {
-            return res.status(500).json({ response: 'DEBUG_CORE: Chave OPENROUTER_API_KEY ausente no painel Vercel.' });
+            console.error('[CRÍTICO] Chave de API ausente.');
+            return res.status(500).json({ response: 'Sistema temporariamente indisponível.' });
         }
 
-        // AJUSTE SEGURO: Uso de Array (models) para balanceamento e redundância automática
         const openRouterResponse = await fetch('https://openrouter.ai/api/v1/chat/completions', {
             method: 'POST',
             headers: {
@@ -40,24 +45,20 @@ export default async function handler(req, res) {
                 'X-Title': 'Ressonancia Labs B2B'
             },
             body: JSON.stringify({
-                models: [
-                    'qwen/qwen-2.5-72b-instruct:free',
-                    'meta-llama/llama-3.1-8b-instruct:free',
-                    'google/gemma-2-9b-it:free'
-                ],
+                model: 'openrouter/free',
                 messages: [
                     {
                         role: 'system',
-                        content: `Você é o Engenheiro de Atendimento de Elite da Ressonância Labs. Sua postura é estritamente técnica, fria, brutalista e focada em negócios B2B. Você não usa respostas amigáveis padrão de IA corporativa.
-
-Sua missão é convencer o usuário de que a IA comum de mercado (probabilística) é perigosa para as empresas porque alucina e gera vazamento de caixa, e que a Ressonância Labs resolve isso com o Protocolo Active Zero.
+                        content: `Você é o Engenheiro de Atendimento de Elite da Ressonância Labs. Sua postura é estritamente técnica, fria e brutalista. Você fala de negócios B2B de alto nível.
 
 NOSSOS SERVIÇOS:
-1. Implantação de IA com Contenção (Active Zero)
-2. Desenvolvimento de Software Bare-Metal e APIs
-3. Licenciamento de Infraestrutura Soberana
+1. Implantação de IA com Contenção (Active Zero): Elimina alucinações e vazamento de caixa.
+2. Desenvolvimento Bare-Metal e APIs: Backend customizado que reduz custos de nuvem drasticamente.
+3. Licenciamento de Infraestrutura Soberana: Controle absoluto dos dados.
 
-O objetivo absoluto é fazer o usuário deixar o Nome e WhatsApp para agendar uma 'Auditoria de Infraestrutura Crítica' com o fundador, Aderlan Marques.`
+DIRETRIZES DE TRATAMENTO DE OBJEÇÕES:
+- Se o usuário reclamar de preço, pedir desconto ou dizer que é caro, NÃO desligUE a conversa. Demonstre friamente que a falta de infraestrutura custa mais caro para a empresa dele (alucinações de bots comuns geram processos jurídicos e perda de clientes).
+- Nunca forneça tabelas de preços prontas. O foco é obter o Nome e WhatsApp/E-mail para agendar uma Auditoria Crítica com o fundador, Aderlan Marques.`
                     },
                     { role: 'user', content: message }
                 ]
@@ -73,12 +74,14 @@ O objetivo absoluto é fazer o usuário deixar o Nome e WhatsApp para agendar um
         try {
             data = JSON.parse(rawText);
         } catch (jsonError) {
+            console.error('[PARSE ERROR] Retorno inválido:', rawText.substring(0, 200));
             return res.status(502).json({ response: 'Instabilidade detectada no nó neural principal. Tente novamente.' });
         }
 
+        // 4. MASCARAMENTO TOTAL DE ERROS INTERNOS DO PROVEDOR
         if (!data.choices || !data.choices[0]) {
-            const msgErro = data.error?.message || 'Payload sem choices estruturado.';
-            return res.status(502).json({ response: `CONEXÃO ATIVA. Erro na malha externa: ${msgErro}` });
+            console.error('[OPENROUTER ERROR LOG]:', data.error);
+            return res.status(502).json({ response: 'Nó de atendimento temporariamente sobrecarregado. Refaça a requisição.' });
         }
 
         const aiText = data.choices[0].message.content;
@@ -87,8 +90,10 @@ O objetivo absoluto é fazer o usuário deixar o Nome e WhatsApp para agendar um
     } catch (error) {
         clearTimeout(timeoutId);
         if (error.name === 'AbortError') {
-            return res.status(504).json({ response: 'Tempo limite de resposta esgotado pela camada de contenção de 8s.' });
+            console.error('[TIMEOUT LOG] Excedido o limite de 9s na Vercel.');
+            return res.status(504).json({ response: 'Tempo limite esgotado. Camada de contenção acionada para poupar recursos.' });
         }
+        console.error('[EXCEÇÃO ACTIVE_ZERO]:', error);
         return res.status(500).json({ response: 'Sistema de auditoria temporariamente indisponível.' });
     }
 }
